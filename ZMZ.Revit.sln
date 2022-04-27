@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32421.90
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZMZ.Revit.Plugin", "ZMZ.Revit.Plugin\ZMZ.Revit.Plugin.csproj", "{F8A5D049-61EB-4EC1-A148-F9EDA38E0278}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZMZ.Revit.Toolkit.Extension", "ZMZ.Revit.Toolkit.Extension\ZMZ.Revit.Toolkit.Extension.csproj", "{2B575783-6799-4DB6-A7BD-15247C48CACC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZMZ.Revit.Entity", "ZMZ.Revit.Entity\ZMZ.Revit.Entity.csproj", "{CAF7F8D7-B50B-4CAC-A170-8BF763B43A53}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZMZ.Revit.Mvvm", "ZMZ.Revit.Mvvm\ZMZ.Revit.Mvvm.csproj", "{EB16835E-B0FE-4B21-98B5-981AEBA42D3B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZMZ.Revit.Application", "ZMZ.Revit.Application\ZMZ.Revit.Application.csproj", "{755C9A36-2BC5-4CBE-9979-1ADBDE8A3D7B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZMZ.Revit.UserControl", "ZMZ.Revit.UserControl\ZMZ.Revit.UserControl.csproj", "{B16F18BA-C10F-4BFE-9231-0FCD3AC83C77}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F8A5D049-61EB-4EC1-A148-F9EDA38E0278}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8A5D049-61EB-4EC1-A148-F9EDA38E0278}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8A5D049-61EB-4EC1-A148-F9EDA38E0278}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8A5D049-61EB-4EC1-A148-F9EDA38E0278}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B575783-6799-4DB6-A7BD-15247C48CACC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B575783-6799-4DB6-A7BD-15247C48CACC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B575783-6799-4DB6-A7BD-15247C48CACC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B575783-6799-4DB6-A7BD-15247C48CACC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAF7F8D7-B50B-4CAC-A170-8BF763B43A53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAF7F8D7-B50B-4CAC-A170-8BF763B43A53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAF7F8D7-B50B-4CAC-A170-8BF763B43A53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAF7F8D7-B50B-4CAC-A170-8BF763B43A53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB16835E-B0FE-4B21-98B5-981AEBA42D3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB16835E-B0FE-4B21-98B5-981AEBA42D3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB16835E-B0FE-4B21-98B5-981AEBA42D3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB16835E-B0FE-4B21-98B5-981AEBA42D3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{755C9A36-2BC5-4CBE-9979-1ADBDE8A3D7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{755C9A36-2BC5-4CBE-9979-1ADBDE8A3D7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{755C9A36-2BC5-4CBE-9979-1ADBDE8A3D7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{755C9A36-2BC5-4CBE-9979-1ADBDE8A3D7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B16F18BA-C10F-4BFE-9231-0FCD3AC83C77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B16F18BA-C10F-4BFE-9231-0FCD3AC83C77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B16F18BA-C10F-4BFE-9231-0FCD3AC83C77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B16F18BA-C10F-4BFE-9231-0FCD3AC83C77}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {721F7171-D16E-4DED-A350-8B1FC9937231}
+	EndGlobalSection
+EndGlobal
