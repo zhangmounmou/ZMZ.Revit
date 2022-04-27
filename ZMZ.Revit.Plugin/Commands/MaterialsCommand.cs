@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ZMZ.Revit.Tuna.Commands
 {
@@ -16,8 +17,8 @@ namespace ZMZ.Revit.Tuna.Commands
     {
         public Result Execute(ExternalCommandData commandData, ref string messages, ElementSet elements)
         {
-            
 
+            MessageBox.Show("材质管理"); 
             //Todo
 
             return Result.Succeeded;

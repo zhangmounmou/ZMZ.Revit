@@ -2,7 +2,7 @@
 <RevitAddIns>
 	<AddIn Type="Application">
 		<Name>ZMZ.Revit.Application</Name>
-		<Assembly>E:\04-Code\01-C#\02-C#\02-BIMBOX\01-Tuna\ZMZ.Revit\ZMZ.Revit.Application\bin\Debug\net472\ZMZ.Revit.Application.dll</Assembly>
+		<Assembly>E:\00-Code\02-学习\01-BIMBOX\Tuna\ZMZ.Revit.Application\bin\Debug\net472\ZMZ.Revit.Application.dll</Assembly>
 		<AddInId>8AD56868-9E06-4A93-9C5F-372BB93F77D7</AddInId>
 		<FullClassName>ZMZ.Revit.Application.ApplicationUI</FullClassName>
 		<VendorId>zmz</VendorId>
