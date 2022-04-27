@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZMZ.Revit.Plugin", "ZMZ.Revit.Plugin\ZMZ.Revit.Plugin.csproj", "{F8A5D049-61EB-4EC1-A148-F9EDA38E0278}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZMZ.Revit.Tuna", "ZMZ.Revit.Plugin\ZMZ.Revit.Tuna.csproj", "{F8A5D049-61EB-4EC1-A148-F9EDA38E0278}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZMZ.Revit.Toolkit.Extension", "ZMZ.Revit.Toolkit.Extension\ZMZ.Revit.Toolkit.Extension.csproj", "{2B575783-6799-4DB6-A7BD-15247C48CACC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZMZ.Revit.Toolkit.Extension", "ZMZ.Revit.Toolkit.Extension\ZMZ.Revit.Toolkit.Extension.csproj", "{2B575783-6799-4DB6-A7BD-15247C48CACC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZMZ.Revit.Entity", "ZMZ.Revit.Entity\ZMZ.Revit.Entity.csproj", "{CAF7F8D7-B50B-4CAC-A170-8BF763B43A53}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZMZ.Revit.Entity", "ZMZ.Revit.Entity\ZMZ.Revit.Entity.csproj", "{CAF7F8D7-B50B-4CAC-A170-8BF763B43A53}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZMZ.Revit.Mvvm", "ZMZ.Revit.Mvvm\ZMZ.Revit.Mvvm.csproj", "{EB16835E-B0FE-4B21-98B5-981AEBA42D3B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZMZ.Revit.Toolkit.Mvvm", "ZMZ.Revit.Mvvm\ZMZ.Revit.Toolkit.Mvvm.csproj", "{EB16835E-B0FE-4B21-98B5-981AEBA42D3B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZMZ.Revit.Application", "ZMZ.Revit.Application\ZMZ.Revit.Application.csproj", "{755C9A36-2BC5-4CBE-9979-1ADBDE8A3D7B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZMZ.Revit.Application", "ZMZ.Revit.Application\ZMZ.Revit.Application.csproj", "{755C9A36-2BC5-4CBE-9979-1ADBDE8A3D7B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZMZ.Revit.UserControl", "ZMZ.Revit.UserControl\ZMZ.Revit.UserControl.csproj", "{B16F18BA-C10F-4BFE-9231-0FCD3AC83C77}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZMZ.Revit.UserControl", "ZMZ.Revit.UserControl\ZMZ.Revit.UserControl.csproj", "{B16F18BA-C10F-4BFE-9231-0FCD3AC83C77}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
