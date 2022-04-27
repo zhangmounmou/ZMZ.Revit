@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+	<AddIn Type="Application">
+		<Name>ZMZ.Revit.Application</Name>
+		<Assembly>E:\04-Code\01-C#\02-C#\02-BIMBOX\01-Tuna\ZMZ.Revit\ZMZ.Revit.Application\bin\Debug\net472\ZMZ.Revit.Application.dll</Assembly>
+		<AddInId>8AD56868-9E06-4A93-9C5F-372BB93F77D7</AddInId>
+		<FullClassName>ZMZ.Revit.Application.ApplicationUI</FullClassName>
+		<VendorId>zmz</VendorId>
+		<VendorDescription></VendorDescription>
+	</AddIn>
+</RevitAddIns>
