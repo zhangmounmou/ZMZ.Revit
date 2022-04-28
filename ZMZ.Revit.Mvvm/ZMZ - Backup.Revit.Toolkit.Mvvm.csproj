@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <Configurations>Debug;Release;RVT_19;RVT_20;RVT_22;RVT_18;RVT_21</Configurations>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ZMZ.Revit.Toolkit.Extension\ZMZ.Revit.Toolkit.Extension.csproj" />
+  </ItemGroup>
+
+</Project>

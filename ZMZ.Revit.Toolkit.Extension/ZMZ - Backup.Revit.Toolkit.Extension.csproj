@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net472</TargetFramework>
+		<PlatformTarget>x64</PlatformTarget>
+		<Configurations>Debug;Release;RVT_19;RVT_20</Configurations>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Revit_API_x64" Version="2019.0.0"  />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Reference Include="PresentationCore"></Reference>
+		<Reference Include="WindowsBase"></Reference>
+	</ItemGroup>
+</Project>

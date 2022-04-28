@@ -17,7 +17,7 @@ namespace ZMZ.Revit.Tuna.Commands
     {
         public Result Execute(ExternalCommandData commandData, ref string messages, ElementSet elements)
         {
-
+            Class1 class1 = new Class1();
             MessageBox.Show("材质管理"); 
             //Todo
 
