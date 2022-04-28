@@ -5,25 +5,20 @@
 		<PlatformTarget>x64</PlatformTarget>
 		<Configurations>Debug;Release;RVT_19;RVT_20;RVT_22;RVT_18;RVT_21</Configurations>
 	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RVT_19|AnyCPU'">
-	  <Optimize>True</Optimize>
+	<PropertyGroup Condition="'$(Configuration)'=='RVT_18'">
+		<TargetFramework>net472</TargetFramework>
 	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RVT_20|AnyCPU'">
-	  <Optimize>True</Optimize>
+	<PropertyGroup Condition="'$(Configuration)'=='RVT_19'">
+		<TargetFramework>net472</TargetFramework>
 	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RVT_22|AnyCPU'">
-	  <Optimize>True</Optimize>
+	<PropertyGroup Condition="'$(Configuration)'=='RVT_20'">
+		<TargetFramework>net48</TargetFramework>
 	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RVT_18|AnyCPU'">
-	  <Optimize>True</Optimize>
+	<PropertyGroup Condition="'$(Configuration)'=='RVT_21'">
+		<TargetFramework>net48</TargetFramework>
 	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RVT_21|AnyCPU'">
-	  <Optimize>True</Optimize>
+	<PropertyGroup Condition="'$(Configuration)'=='RVT_22'">
+		<TargetFramework>net48</TargetFramework>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -32,11 +27,31 @@
 		<PackageReference Include="Revit_API_x64" Version="2020.0.0" Condition="'$(Configuration)'=='RVT_20'" />
 		<PackageReference Include="Revit_API_x64" Version="2021.0.0" Condition="'$(Configuration)'=='RVT_21'" />
 		<PackageReference Include="Revit_API_x64" Version="2022.0.0" Condition="'$(Configuration)'=='RVT_22'" />
-		<PackageReference Include="Revit_API_x64" Version="2019.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<Reference Include="PresentationCore"></Reference>
 		<Reference Include="WindowsBase"></Reference>
 	</ItemGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RVT_19|AnyCPU'">
+		<Optimize>True</Optimize>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RVT_20|AnyCPU'">
+		<Optimize>True</Optimize>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RVT_22|AnyCPU'">
+		<Optimize>True</Optimize>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RVT_18|AnyCPU'">
+		<Optimize>True</Optimize>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RVT_21|AnyCPU'">
+		<Optimize>True</Optimize>
+	</PropertyGroup>
+
 </Project>

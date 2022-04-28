@@ -9,25 +9,26 @@
 		<Configurations>Debug;Release;RVT_19;RVT_20;RVT_22;RVT_21;RVT_18</Configurations>
 	</PropertyGroup>
 
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RVT_18|AnyCPU'">
+		<Optimize>True</Optimize>
+	</PropertyGroup>
+
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RVT_19|AnyCPU'">
-	  <Optimize>True</Optimize>
+		<Optimize>True</Optimize>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RVT_20|AnyCPU'">
-	  <Optimize>True</Optimize>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RVT_22|AnyCPU'">
-	  <Optimize>True</Optimize>
+		<Optimize>True</Optimize>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RVT_21|AnyCPU'">
-	  <Optimize>True</Optimize>
+		<Optimize>True</Optimize>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RVT_22|AnyCPU'">
+		<Optimize>True</Optimize>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RVT_18|AnyCPU'">
-	  <Optimize>True</Optimize>
-	</PropertyGroup>
+
 
 	<ItemGroup>
 		<None Remove="Resources\github.png" />
@@ -38,7 +39,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\ZMZ.Revit.Plugin\ZMZ.Revit.Tuna.csproj" />
+	  <ProjectReference Include="..\ZMZ.Revit.Tuna\ZMZ.Revit.Tuna.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
