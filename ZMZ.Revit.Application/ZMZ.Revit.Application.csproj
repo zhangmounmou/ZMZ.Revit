@@ -9,6 +9,48 @@
 		<Configurations>Debug;Release;RVT_19;RVT_20;RVT_22;RVT_21;RVT_18</Configurations>
 	</PropertyGroup>
 
+	<!--设置Framework和启动的外部程序-->
+	<PropertyGroup Condition="'$(Configuration)'=='RVT_18'">
+		<TargetFramework>net472</TargetFramework>
+		<StartAction>Program</StartAction>
+		<StartProgram>C:\Program Files\Autodesk\Revit 2018\Revit.exe</StartProgram>
+		<RvtVersion>2018</RvtVersion>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)'=='RVT_19'">
+		<TargetFramework>net472</TargetFramework>
+		<StartAction>Program</StartAction>
+		<StartProgram>C:\Program Files\Autodesk\Revit 2019\Revit.exe</StartProgram>
+		<RvtVersion>2019</RvtVersion>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)'=='RVT_20'">
+		<TargetFramework>net48</TargetFramework>
+		<StartAction>Program</StartAction>
+		<StartProgram>C:\Program Files\Autodesk\Revit 2020\Revit.exe</StartProgram>
+		<RvtVersion>2020</RvtVersion>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)'=='RVT_21'">
+		<TargetFramework>net48</TargetFramework>
+		<StartAction>Program</StartAction>
+		<StartProgram>C:\Program Files\Autodesk\Revit 2021\Revit.exe</StartProgram>
+		<RvtVersion>2021</RvtVersion>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)'=='RVT_22'">
+		<TargetFramework>net48</TargetFramework>
+		<StartAction>Program</StartAction>
+		<StartProgram>C:\Program Files\Autodesk\Revit 2022\Revit.exe</StartProgram>
+		<RvtVersion>2022</RvtVersion>
+	</PropertyGroup>
+
+	<!--设置复制.addin文件到指定Revit目录下-->
+	<Target Name="CopyAddin" BeforeTargets="PostBuildEvent">
+		<ItemGroup>
+			<SourceFiles Include="$(ProjectDir)$(OutDir)\**\*.*" ></SourceFiles>
+		</ItemGroup>
+		<Copy SourceFiles="$(ProjectDir)\Tuna.addin" DestinationFolder="C:\ProgramData\Autodesk\Revit\Addins\$(RvtVersion)"></Copy>
+		<Copy SourceFiles="@(SourceFiles)" DestinationFiles="@(SourceFiles->'C:\ProgramData\Autodesk\Revit\Addins\$(RvtVersion)\Tuna\%(RecursiveDir)%(FileName)%(Extension)')"></Copy>
+	</Target>
+
+
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RVT_18|AnyCPU'">
 		<Optimize>True</Optimize>
 	</PropertyGroup>
@@ -29,7 +71,6 @@
 	</PropertyGroup>
 
 
-
 	<ItemGroup>
 		<None Remove="Resources\github.png" />
 	</ItemGroup>
@@ -39,7 +80,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\ZMZ.Revit.Tuna\ZMZ.Revit.Tuna.csproj" />
+		<ProjectReference Include="..\ZMZ.Revit.Tuna\ZMZ.Revit.Tuna.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
