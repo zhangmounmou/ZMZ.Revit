@@ -6,7 +6,13 @@
 		<UseWPF>true</UseWPF>
 		<StartAction>Program</StartAction>
 		<StartProgram>C:\Program Files\Autodesk\Revit 2019\Revit.exe</StartProgram>
-		<Configurations>Debug;Release;RVT_19;RVT_20;RVT_22;RVT_21;RVT_18</Configurations>
+		<Configurations>Debug;Release;RVT_19;RVT_20;RVT_22;RVT_21;RVT_18;R19_DB</Configurations>
+	</PropertyGroup>
+	<!--开发使用Debug，方便热加载-->
+	<PropertyGroup Condition="'$(Configuration)'=='Debug'">
+		<TargetFramework>net48</TargetFramework>
+		<StartAction>Program</StartAction>
+		<StartProgram>C:\Program Files\Autodesk\Revit 2021\Revit.exe</StartProgram>
 	</PropertyGroup>
 
 	<!--设置Framework和启动的外部程序-->
@@ -44,7 +50,7 @@
 	<!--设置复制.addin文件到指定Revit目录下-->
 	<Target Name="CopyAddin" BeforeTargets="PostBuildEvent">
 		<ItemGroup>
-			<SourceFiles Include="$(ProjectDir)$(OutDir)\**\*.*" ></SourceFiles>
+			<SourceFiles Include="$(ProjectDir)$(OutDir)\**\*.*"></SourceFiles>
 		</ItemGroup>
 		<Copy SourceFiles="$(ProjectDir)\Tuna.addin" DestinationFolder="C:\ProgramData\Autodesk\Revit\Addins\$(RvtVersion)"></Copy>
 		<Copy SourceFiles="@(SourceFiles)" DestinationFiles="@(SourceFiles->'C:\ProgramData\Autodesk\Revit\Addins\$(RvtVersion)\Tuna\%(RecursiveDir)%(FileName)%(Extension)')"></Copy>

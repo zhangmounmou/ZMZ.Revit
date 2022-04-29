@@ -1,15 +1,20 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net48</TargetFramework>
+		<TargetFramework>net472</TargetFramework>
 		<UseWPF>true</UseWPF>
 		<PlatformTarget>x64</PlatformTarget>
 		
 		<!--<StartAction>Program</StartAction>
 		<StartProgram>C:\Program Files\Autodesk\Revit 2019\Revit.exe</StartProgram>-->
-		<Configurations>Debug;Release;RVT_19;RVT_20;RVT_22;RVT_21;RVT_18</Configurations>
+		<Configurations>Debug;Release;RVT_19;RVT_20;RVT_22;RVT_21;RVT_18;R19_DB</Configurations>
 	</PropertyGroup>
-
+	<PropertyGroup Condition="'$(Configuration)'=='Debug'">
+		<TargetFramework>net48</TargetFramework>
+		<StartAction>Program</StartAction>
+		<StartProgram>C:\Program Files\Autodesk\Revit 2021\Revit.exe</StartProgram>
+	</PropertyGroup>
+	
 	<PropertyGroup Condition="'$(Configuration)'=='RVT_18'">
 		<TargetFramework>net472</TargetFramework>
 		<StartAction>Program</StartAction>

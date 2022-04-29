@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ZMZ.Revit.Tuna.Commands
 {
@@ -18,8 +19,8 @@ namespace ZMZ.Revit.Tuna.Commands
         {
             UIDocument uIDocument = commandData.Application.ActiveUIDocument;
             Document document = uIDocument.Document;
-            //Todo
-
+            Views.Materials materials = new Views.Materials(document);
+            materials.ShowDialog();
             return Result.Succeeded;
         }
 
