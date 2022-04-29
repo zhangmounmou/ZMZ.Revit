@@ -8,5 +8,9 @@ namespace ZMZ.Revit.Tuna.Views
 {
     internal class test
     {
+        public test()
+        {
+
+        }
     }
 }
