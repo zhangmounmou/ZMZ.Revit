@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using ZMZ.Revit.Toolkit.Extension.DotNet;
 
 namespace ZMZ.Revit.Tuna.Commands
 {
@@ -20,8 +21,10 @@ namespace ZMZ.Revit.Tuna.Commands
             UIDocument uIDocument = commandData.Application.ActiveUIDocument;
             Document document = uIDocument.Document;
             Views.Materials materials = new Views.Materials(document);
-            materials.ShowDialog();
-            return Result.Succeeded;
+            //"ZMZ.Revit.Entity.dll".LoadAssembly();
+            if (materials.ShowDialog().Value)
+                return Result.Succeeded;
+            return Result.Cancelled;
         }
 
         public bool IsCommandAvailable(UIApplication applicationData, CategorySet selectedCategories)

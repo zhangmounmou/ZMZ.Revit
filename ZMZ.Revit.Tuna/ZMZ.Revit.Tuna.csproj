@@ -63,6 +63,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\ZMZ.Revit.Entity\ZMZ.Revit.Entity.csproj" />
 		<ProjectReference Include="..\ZMZ.Revit.Toolkit.Extension\ZMZ.Revit.Toolkit.Extension.csproj" />
 		<ProjectReference Include="..\ZMZ.Revit.UserControl\ZMZ.Revit.UserControl.csproj" />
 	</ItemGroup>
