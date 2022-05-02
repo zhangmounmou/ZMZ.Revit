@@ -22,9 +22,19 @@ namespace ZMZ.Revit.Tuna.Commands
             Document document = uIDocument.Document;
             Views.Materials materials = new Views.Materials(document);
             //"ZMZ.Revit.Entity.dll".LoadAssembly();
-            if (materials.ShowDialog().Value)
+            TransactionStatus starus;
+            using (TransactionGroup group = new TransactionGroup(document, "材质管理"))
+            {
+                group.Start();
+                if (materials.ShowDialog().Value)
+                    starus = group.Assimilate();
+                else
+                    starus = group.RollBack();
+            }
+            if (starus == TransactionStatus.Committed)
                 return Result.Succeeded;
-            return Result.Cancelled;
+            else
+                return Result.Cancelled;
         }
 
         public bool IsCommandAvailable(UIApplication applicationData, CategorySet selectedCategories)

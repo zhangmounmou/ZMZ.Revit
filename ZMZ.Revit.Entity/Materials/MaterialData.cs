@@ -4,15 +4,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ZMZ.Revit.Toolkit.Extension;
 using ZMZ.Revit.Toolkit.Extension.Revit;
 
 namespace ZMZ.Revit.Entity.Materials
 {
     public class MaterialData
     {
-        public string Name { get; set; }
 
-        public Color Color { get; set; }
+        private string _name;
+        public string Name
+        {
+            get { return _name; }
+            set
+            {
+                _name = value;
+            }
+        }
+
+        private Color _color;
+        public Color Color
+        {
+            get => _color;
+            set
+            {
+                _color = value;
+            }
+        }
 
         public Color AppearanceColor { get; set; }
         public Material Material { get; set; }
@@ -24,8 +42,16 @@ namespace ZMZ.Revit.Entity.Materials
             Name = material.Name;
             Color = material.Color;
             Material = material;
-            AppearanceColor = material.GetAppearanceColor() ;
+            AppearanceColor = material.GetAppearanceColor();
         }
 
+        private void Save()
+        {
+            Doc.NewTrans("修改材质", () => 
+            {
+                Material.Name = Name;
+                Material.Color = Color;
+            });
+        }
     }
 }
