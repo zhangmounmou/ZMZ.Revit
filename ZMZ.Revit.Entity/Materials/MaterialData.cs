@@ -1,4 +1,5 @@
 ﻿using Autodesk.Revit.DB;
+using GalaSoft.MvvmLight;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ using ZMZ.Revit.Toolkit.Extension.Revit;
 
 namespace ZMZ.Revit.Entity.Materials
 {
-    public class MaterialData
+    public class MaterialData : ObservableObject
     {
 
         private string _name;
@@ -19,6 +20,8 @@ namespace ZMZ.Revit.Entity.Materials
             set
             {
                 _name = value;
+                Doc.NewTrans("修改材质名称", () => Material.Name = _name);
+                RaisePropertyChanged();
             }
         }
 
@@ -29,10 +32,28 @@ namespace ZMZ.Revit.Entity.Materials
             set
             {
                 _color = value;
+                Doc.NewTrans("修改颜色", () => Material.Color = _color);
+                RaisePropertyChanged();
             }
         }
 
-        public Color AppearanceColor { get; set; }
+        private Color _appearanceColor;
+        public Color AppearanceColor
+        {
+            get => _appearanceColor;
+            set
+            {
+                #region 写法1
+                _appearanceColor = value;
+                RaisePropertyChanged();
+                #endregion
+                #region 写法2
+
+                #endregion
+
+
+            }
+        }
         public Material Material { get; set; }
 
         public Document Doc { get => Material.Document; }
@@ -47,7 +68,7 @@ namespace ZMZ.Revit.Entity.Materials
 
         private void Save()
         {
-            Doc.NewTrans("修改材质", () => 
+            Doc.NewTrans("修改材质", () =>
             {
                 Material.Name = Name;
                 Material.Color = Color;

@@ -10,6 +10,7 @@
        xmlns:command="http://www.galasoft.ch/mvvmlight"
         d:DataContext="{d:DesignInstance Type=vm:MaterialsViewModel}"
         WindowStartupLocation="CenterScreen"
+        x:Name="MaterialWindow"
         mc:Ignorable="d"
         Title="Materials"
         Height="450"
@@ -54,31 +55,57 @@
                     <!--PassEventArgsToCommand="True" 是否传参-->
                 </i:EventTrigger>
             </i:Interaction.Triggers>
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListBoxItem">
+                                <!--<GroupBox x:Name="back" Header="123">
+                                    <ContentPresenter></ContentPresenter></GroupBox>-->
+                                <Border x:Name="back">
+                                    <ContentPresenter></ContentPresenter>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="back" Property="Background" Value="LightGray"></Setter>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListBox.ItemContainerStyle>
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <Border Width="20"
+                    <Border Padding="5" Background="Transparent">
+                        <Grid >
+                            <StackPanel Orientation="Horizontal">
+                                <Border Width="20"
                                 Height="20"
                                 CornerRadius="5"
                                 BorderThickness="1"
                                 BorderBrush="Gray"
                                 Background="{Binding Color,Converter={StaticResource ColorConverter}}"></Border>
-                        <TextBlock Text="{Binding Name}"
+                                <TextBlock Text="{Binding Name}"
                                    VerticalAlignment="Center"
                                    Margin="5 0"></TextBlock>
-                        <Border Width="20"
+                                <Border Width="20"
                                 Height="20"
                                 CornerRadius="5"
                                 BorderThickness="1"
                                 BorderBrush="Gray"
                                 Background="{Binding AppearanceColor,Converter={StaticResource ColorConverter}}"></Border>
-                    </StackPanel>
 
+                            </StackPanel>
+                            <Button Content="编辑"  HorizontalAlignment="Right" Command="{Binding ElementName=MaterialWindow,Path=DataContext.EditMaterialCommand}"></Button>
+                            <!--<Button Content="编辑"  HorizontalAlignment="Right" Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=Window},Path=DataContext.EditMaterialCommand}"></Button>-->
+                        </Grid>
+                    </Border>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
         <Button Grid.Row="2"
                 Margin="5"
-                x:Name="Btn_Submit" Command="{Binding ComfirmCommand}">确定</Button>
+                x:Name="Btn_Submit" Command="{Binding SubmitCommand}">确定</Button>
     </Grid>
 </Window>

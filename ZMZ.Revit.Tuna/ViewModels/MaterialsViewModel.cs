@@ -1,5 +1,7 @@
 ﻿using Autodesk.Revit.DB;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,7 +16,7 @@ using ZMZ.Revit.Toolkit.Extension;
 
 namespace ZMZ.Revit.Tuna.ViewModels
 {
-    public class MaterialsViewModel
+    public class MaterialsViewModel : ViewModelBase
     {
         private Document _doc;
 
@@ -31,8 +33,7 @@ namespace ZMZ.Revit.Tuna.ViewModels
             get { return _materials; }
             set
             {
-                _materials = value;
-                //NotifyPropertyChanged("Materials");
+                Set(ref _materials, value);
             }
         }
         #endregion
@@ -78,6 +79,10 @@ namespace ZMZ.Revit.Tuna.ViewModels
         /// </summary>
         private RelayCommand<SelectionChangedEventArgs> _testCommand;
 
+        private RelayCommand _submit;
+
+        private RelayCommand<MaterialData> _editMaterialCommand;
+
         public RelayCommand<IList> DeleteMaterialsCommand
         {
             get => _deleteMaterialsCommand ??= new RelayCommand<IList>(DeleteMaterials);
@@ -95,11 +100,32 @@ namespace ZMZ.Revit.Tuna.ViewModels
         /// </summary>
         public RelayCommand<SelectionChangedEventArgs> TestCommand
         {
-            get => _testCommand ??= new RelayCommand<SelectionChangedEventArgs>(e => { 
+            get => _testCommand ??= new RelayCommand<SelectionChangedEventArgs>(e =>
+            {
                 //System.Windows.MessageBox.Show(e.AddedItems.Count.ToString());
             });
         }
 
+        public RelayCommand SubmitCommand
+        {
+            get => _submit ??= new RelayCommand(Submit);
+        }
+
+        public void Submit()
+        {
+            //因为继承了ViewModelBase
+            //Messenger.Default.Send(true, Contacts.Tokens.MaterialsDialog);
+
+            MessengerInstance.Send(true, Contacts.Tokens.MaterialsDialog);
+        }
+
+        public RelayCommand<MaterialData> EditMaterialCommand
+        {
+            get => _editMaterialCommand ??= new RelayCommand<MaterialData>(obj =>
+            {
+                MessengerInstance.Send(obj, Contacts.Tokens.ShowMaterialInfoDialog);
+            });
+        }
 
 
         private bool CanQueryElements()
@@ -109,16 +135,14 @@ namespace ZMZ.Revit.Tuna.ViewModels
 
         private void QueryElements()
         {
-            Materials.Clear();
             FilteredElementCollector elements = new FilteredElementCollector(_doc).OfClass(typeof(Material));
             var materialDatas = elements.ToList().ConvertAll(x => new MaterialData(x as Material))
                 .Where(e => string.IsNullOrEmpty(KeyWorld) || e.Name.Contains(KeyWorld));
-            foreach (var item in materialDatas)
-            {
-                Materials.Add(item);
-            }
-            //Materials = new ObservableCollection<MaterialData>(materialDatas);
-            //Materials = new ObservableCollection<MaterialData>();
+            //foreach (var item in materialDatas)
+            //{
+            //    Materials.Add(item);
+            //}
+            Materials = new ObservableCollection<MaterialData>(materialDatas);
         }
         #endregion
     }

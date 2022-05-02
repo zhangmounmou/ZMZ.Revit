@@ -1,4 +1,5 @@
 ﻿using Autodesk.Revit.DB;
+using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ZMZ.Revit.Entity.Materials;
 
 namespace ZMZ.Revit.Tuna.Views
 {
@@ -26,14 +28,26 @@ namespace ZMZ.Revit.Tuna.Views
             InitializeComponent();
             _viewModel = new ViewModels.MaterialsViewModel(doc);
             this.DataContext = _viewModel;
-            //FilteredElementCollector elements = new FilteredElementCollector(doc).OfClass(typeof(Material));
-            //foreach (var item in elements)
-            //{
-            //    ListMaterial.Items.Add(item);
-            //}
-            //ListMaterial.ItemsSource = elements.ToList();
+            Messenger.Default.Register<bool>(this, Contacts.Tokens.MaterialsDialog, CloseWindow);
+            Messenger.Default.Register<MaterialData>(this, Contacts.Tokens.ShowMaterialInfoDialog, ShowMaterialInfo);
+            Unloaded += Materials_Unloaded;
         }
 
+        private void ShowMaterialInfo(MaterialData obj)
+        {
+            MaterialInfoView materialInfoView = new MaterialInfoView(obj);
+            materialInfoView.ShowDialog();
+        }
 
+        private void Materials_Unloaded(object sender, RoutedEventArgs e)
+        {
+            Messenger.Default.Unregister<bool>(this);
+        }
+
+        private void CloseWindow(bool result)
+        {
+            DialogResult = result;
+            Close();
+        }
     }
 }
