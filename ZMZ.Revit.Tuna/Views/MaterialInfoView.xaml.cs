@@ -26,7 +26,7 @@ namespace ZMZ.Revit.Tuna.Views
         {
             InitializeComponent();
             DataContext = new MaterialInfoViewModel(materialData);
-            Messenger.Default.Register<bool>(this, Contacts.Tokens.ShowMaterialInfoDialog, CloseWindow);
+            Messenger.Default.Register<bool>(this, Contacts.Tokens.CloseMaterialInfoDialog, CloseWindow);
             Unloaded += (o, e) => { Messenger.Default.Unregister(this); };
         }
 

@@ -96,7 +96,7 @@ namespace ZMZ.Revit.Tuna.ViewModels
                     _materialData.Color = Color;
                 }
                 _materialData.AppearanceColor = AppearnceColor;
-                MessengerInstance.Send(true, Contacts.Tokens.ShowMaterialInfoDialog);
+                MessengerInstance.Send(true, Contacts.Tokens.CloseMaterialInfoDialog);
             });
         }
     }
