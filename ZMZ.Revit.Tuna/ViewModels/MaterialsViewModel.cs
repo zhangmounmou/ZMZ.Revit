@@ -137,7 +137,7 @@ namespace ZMZ.Revit.Tuna.ViewModels
         {
             FilteredElementCollector elements = new FilteredElementCollector(_doc).OfClass(typeof(Material));
             var materialDatas = elements.ToList().ConvertAll(x => new MaterialData(x as Material))
-                .Where(e => string.IsNullOrEmpty(KeyWorld) || e.Name.Contains(KeyWorld));
+                .Where(e => e.Material != null && (string.IsNullOrEmpty(KeyWorld) || e.Name.Contains(KeyWorld)));
             //foreach (var item in materialDatas)
             //{
             //    Materials.Add(item);

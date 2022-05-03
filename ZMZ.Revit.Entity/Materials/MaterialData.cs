@@ -20,7 +20,7 @@ namespace ZMZ.Revit.Entity.Materials
             set
             {
                 _name = value;
-                Doc.NewTrans("修改材质名称", () => Material.Name = _name);
+                //Doc.NewTrans("修改材质名称", () => Material.Name = _name);
                 RaisePropertyChanged();
             }
         }
@@ -32,7 +32,7 @@ namespace ZMZ.Revit.Entity.Materials
             set
             {
                 _color = value;
-                Doc.NewTrans("修改颜色", () => Material.Color = _color);
+                //Doc.NewTrans("修改颜色", () => Material.Color = _color);
                 RaisePropertyChanged();
             }
         }
@@ -44,25 +44,26 @@ namespace ZMZ.Revit.Entity.Materials
             set
             {
                 #region 写法1
-                _appearanceColor = value;
-                RaisePropertyChanged();
+                //_appearanceColor = value;
+                //RaisePropertyChanged();
                 #endregion
                 #region 写法2
-
+                Set(ref _appearanceColor, value);
                 #endregion
-
-
             }
         }
         public Material Material { get; set; }
 
-        public Document Doc { get => Material.Document; }
+        public Document Doc { get; set; }
 
         public MaterialData(Material material)
         {
+            if (material == null)
+                return;
+            Material = material;
+            Doc = material.Document;
             Name = material.Name;
             Color = material.Color;
-            Material = material;
             AppearanceColor = material.GetAppearanceColor();
         }
 

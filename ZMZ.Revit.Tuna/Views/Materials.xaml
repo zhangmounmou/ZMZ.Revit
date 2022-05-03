@@ -97,7 +97,7 @@
                                 Background="{Binding AppearanceColor,Converter={StaticResource ColorConverter}}"></Border>
 
                             </StackPanel>
-                            <Button Content="编辑"  HorizontalAlignment="Right" Command="{Binding ElementName=MaterialWindow,Path=DataContext.EditMaterialCommand}"></Button>
+                            <Button Content="编辑"  HorizontalAlignment="Right" Command="{Binding ElementName=MaterialWindow,Path=DataContext.EditMaterialCommand}" CommandParameter="{Binding}"></Button>
                             <!--<Button Content="编辑"  HorizontalAlignment="Right" Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=Window},Path=DataContext.EditMaterialCommand}"></Button>-->
                         </Grid>
                     </Border>
