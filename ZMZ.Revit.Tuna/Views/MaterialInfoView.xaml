@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance  Type=vm:MaterialInfoViewModel}"
         Title="MaterialInfoView" Height="450" Width="300" Name="MaterialInfoWindow" SizeToContent="Height" 
-        >
+       WindowStartupLocation="CenterScreen" >
     <Window.Resources>
         <converter:ColorConverter x:Key="colorConverter"></converter:ColorConverter>
     </Window.Resources>

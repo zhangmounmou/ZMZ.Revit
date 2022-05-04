@@ -11,5 +11,7 @@ namespace ZMZ.Revit.Tuna.Contacts
         public static string MaterialsDialog = "Materials";
         public static string ShowMaterialInfoDialog = "MaterialInfo";
         public static string CloseMaterialInfoDialog = "CloseMaterialInfo";
+        public static string EditMaterial = "EditMaterial";
+        public static string CreateMaterial = "CreateMaterial";
     }
 }

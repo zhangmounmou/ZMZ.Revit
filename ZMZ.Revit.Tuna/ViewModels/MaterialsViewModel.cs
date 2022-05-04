@@ -55,7 +55,11 @@ namespace ZMZ.Revit.Tuna.ViewModels
             _doc = doc;
             QueryElements();
             //DeleteMaterialsCommand = new RelayCommand(DeleteMaterials);
+
+            MessengerInstance.Register<MaterialData>(this, Contacts.Tokens.CreateMaterial, CreateMaterial);
         }
+
+
 
         private void DeleteMaterials(IList selectedItems)
         {
@@ -82,6 +86,7 @@ namespace ZMZ.Revit.Tuna.ViewModels
         private RelayCommand _submit;
 
         private RelayCommand<MaterialData> _editMaterialCommand;
+        private RelayCommand _createMaterialCommand;
 
         public RelayCommand<IList> DeleteMaterialsCommand
         {
@@ -123,11 +128,27 @@ namespace ZMZ.Revit.Tuna.ViewModels
         {
             get => _editMaterialCommand ??= new RelayCommand<MaterialData>(obj =>
             {
-                MessengerInstance.Send(obj, Contacts.Tokens.ShowMaterialInfoDialog);
+                MessengerInstance.Send(new NotificationMessageAction<MaterialData>(obj, "Edit", (e) => { }), Contacts.Tokens.ShowMaterialInfoDialog);
             });
         }
 
-
+        public RelayCommand CreateMaterialCommand
+        {
+            get => _createMaterialCommand ??= new RelayCommand(() =>
+            {
+                MessengerInstance.Send(new NotificationMessageAction<MaterialData>(null, _doc, Contacts.Tokens.CreateMaterial, (e) =>
+                 {
+                     if (e != null)
+                     {
+                         Materials.Insert(0, e);
+                     }
+                 }), Contacts.Tokens.ShowMaterialInfoDialog);
+            });
+        }
+        private void CreateMaterial(MaterialData obj)
+        {
+            Materials.Insert(0, obj);
+        }
         private bool CanQueryElements()
         {
             return !string.IsNullOrEmpty(KeyWorld);

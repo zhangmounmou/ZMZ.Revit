@@ -41,7 +41,7 @@
         <StackPanel Orientation="Horizontal"
                     HorizontalAlignment="Right"
                     Margin="5">
-            <Button x:Name="AddMaterial">创建材质</Button>
+            <Button x:Name="AddMaterial" Command="{Binding CreateMaterialCommand}">创建材质</Button>
             <Button x:Name="Btn_DeleteMaterials" Command="{Binding DeleteMaterialsCommand}" CommandParameter="{Binding ElementName=ListMaterial,Path=SelectedItems}">删除材质</Button>
         </StackPanel>
         <ListBox Grid.Row="1"

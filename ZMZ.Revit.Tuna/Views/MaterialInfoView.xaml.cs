@@ -22,12 +22,15 @@ namespace ZMZ.Revit.Tuna.Views
     /// </summary>
     public partial class MaterialInfoView : Window
     {
-        public MaterialInfoView(MaterialData materialData = null)
+        public MaterialInfoView(NotificationMessageAction<MaterialData> message = null)
         {
             InitializeComponent();
-            DataContext = new MaterialInfoViewModel(materialData);
+            DataContext = new MaterialInfoViewModel(message);
             Messenger.Default.Register<bool>(this, Contacts.Tokens.CloseMaterialInfoDialog, CloseWindow);
-            Unloaded += (o, e) => { Messenger.Default.Unregister(this); };
+            Unloaded += (o, e) => 
+            { 
+                Messenger.Default.Unregister(this);
+            };
         }
 
 

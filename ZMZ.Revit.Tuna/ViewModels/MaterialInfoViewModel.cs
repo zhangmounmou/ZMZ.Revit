@@ -1,6 +1,7 @@
 ﻿using Autodesk.Revit.DB;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,12 +49,17 @@ namespace ZMZ.Revit.Tuna.ViewModels
         #endregion
 
         private MaterialData _materialData;
-        public MaterialInfoViewModel(MaterialData data)
+        private NotificationMessageAction<MaterialData> _message;
+        public MaterialInfoViewModel(NotificationMessageAction<MaterialData> message)
         {
-            _materialData = data ?? new MaterialData(null);
-            Name = _materialData.Name;
-            Color = _materialData.Color;
-            AppearnceColor = _materialData.AppearanceColor;
+            _message = message;
+            if (message.Sender is MaterialData material)
+            {
+                _materialData = material ?? new MaterialData(null);
+                Name = _materialData.Name;
+                Color = _materialData.Color;
+                AppearnceColor = _materialData.AppearanceColor;
+            }
         }
 
 
@@ -85,7 +91,16 @@ namespace ZMZ.Revit.Tuna.ViewModels
         {
             get => new RelayCommand(() =>
             {
-                if (_materialData.Name != Name)
+                if (_message.Notification == Contacts.Tokens.CreateMaterial)
+                {
+                    Document doc = _message.Target as Document;
+                    doc.NewTrans("创建材质", () =>
+                    {
+                        ElementId elementid = Material.Create(doc, Name);
+                        _materialData = new MaterialData(doc.GetElement(elementid) as Material);
+                    });
+                }
+                else if (_materialData.Name != Name)
                 {
                     _materialData.Doc.NewTrans("修改材质名称", () => _materialData.Material.Name = Name);
                     _materialData.Name = Name;
@@ -96,6 +111,13 @@ namespace ZMZ.Revit.Tuna.ViewModels
                     _materialData.Color = Color;
                 }
                 _materialData.AppearanceColor = AppearnceColor;
+                
+                //更新材质列表德消息
+                //方式1：使用消息通知进行列表德更新
+                //_message.Execute(_materialData);
+                //方式2 ：使用消息中心进行材质列表的更新
+                MessengerInstance.Send(_materialData, Contacts.Tokens.CreateMaterial);
+                //窗体关闭的消息
                 MessengerInstance.Send(true, Contacts.Tokens.CloseMaterialInfoDialog);
             });
         }
