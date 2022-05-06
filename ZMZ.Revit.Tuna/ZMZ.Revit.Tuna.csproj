@@ -15,7 +15,11 @@
 		<StartAction>Program</StartAction>
 		<StartProgram>C:\Program Files\Autodesk\Revit 2019\Revit.exe</StartProgram>
 	</PropertyGroup>
-	
+	<PropertyGroup Condition="'$(Configuration)'=='RVT_16'">
+		<TargetFramework>net452</TargetFramework>
+		<StartAction>Program</StartAction>
+		<StartProgram>C:\Program Files\Autodesk\Revit 2016\Revit.exe</StartProgram>
+	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)'=='RVT_18'">
 		<TargetFramework>net472</TargetFramework>
 		<StartAction>Program</StartAction>
@@ -41,8 +45,11 @@
 		<StartAction>Program</StartAction>
 		<StartProgram>C:\Program Files\Autodesk\Revit 2022\Revit.exe</StartProgram>
 	</PropertyGroup>
-	
-	
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RVT_16|AnyCPU'">
+		<Optimize>True</Optimize>
+	</PropertyGroup>
+
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RVT_19|AnyCPU'">
 		<Optimize>True</Optimize>
 	</PropertyGroup>

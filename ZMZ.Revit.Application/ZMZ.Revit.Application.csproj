@@ -16,6 +16,12 @@
 	</PropertyGroup>
 
 	<!--设置Framework和启动的外部程序-->
+	<PropertyGroup Condition="'$(Configuration)'=='RVT_16'">
+		<TargetFramework>net452</TargetFramework>
+		<StartAction>Program</StartAction>
+		<StartProgram>C:\Program Files\Autodesk\Revit 2016\Revit.exe</StartProgram>
+		<RvtVersion>2016</RvtVersion>
+	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)'=='RVT_18'">
 		<TargetFramework>net472</TargetFramework>
 		<StartAction>Program</StartAction>
@@ -56,7 +62,9 @@
 		<Copy SourceFiles="@(SourceFiles)" DestinationFiles="@(SourceFiles->'C:\ProgramData\Autodesk\Revit\Addins\$(RvtVersion)\Tuna\%(RecursiveDir)%(FileName)%(Extension)')"></Copy>
 	</Target>
 
-
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RVT_16|AnyCPU'">
+		<Optimize>True</Optimize>
+	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RVT_18|AnyCPU'">
 		<Optimize>True</Optimize>
 	</PropertyGroup>

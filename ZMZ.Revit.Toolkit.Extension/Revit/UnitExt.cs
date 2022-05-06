@@ -17,7 +17,7 @@ namespace ZMZ.Revit.Toolkit.Extension.Revit
         public static double ConvertToFeet(this double value)
         {
 
-#if RVT_18 || RVT_19 || RVT_20 || DEBUG
+#if RVT_16 ||  RVT_18 || RVT_19 || RVT_20 || DEBUG
             return UnitUtils.Convert(value, DisplayUnitType.DUT_MILLIMETERS, DisplayUnitType.DUT_DECIMAL_FEET);
 #else
             return UnitUtils.Convert(value, UnitTypeId.Millimeters, UnitTypeId.Feet);

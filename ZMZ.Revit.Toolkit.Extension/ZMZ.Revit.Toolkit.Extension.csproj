@@ -9,7 +9,7 @@
 		<TargetFramework>net472</TargetFramework>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)'=='RVT_16'">
-		<TargetFramework>net45</TargetFramework>
+		<TargetFramework>net452</TargetFramework>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)'=='RVT_18'">
 		<TargetFramework>net472</TargetFramework>

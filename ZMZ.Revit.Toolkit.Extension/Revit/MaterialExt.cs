@@ -13,7 +13,7 @@ namespace ZMZ.Revit.Toolkit.Extension.Revit
         public static Color GetAppearanceColor(this Material material)
         {
 
-#if RVT_18 
+#if RVT_16 ||RVT_18 
             return material.SurfacePatternColor;
 #else
             var mId = material.AppearanceAssetId;
