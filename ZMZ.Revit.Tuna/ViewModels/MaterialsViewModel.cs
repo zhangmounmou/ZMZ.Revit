@@ -13,12 +13,13 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using ZMZ.Revit.Entity.Materials;
 using ZMZ.Revit.Toolkit.Extension;
+using ZMZ.Revit.Tuna.IServices;
 
 namespace ZMZ.Revit.Tuna.ViewModels
 {
     public class MaterialsViewModel : ViewModelBase
     {
-        private Document _doc;
+        private readonly IMaterialService _service;
 
 
         #region Materials 
@@ -50,29 +51,25 @@ namespace ZMZ.Revit.Tuna.ViewModels
             }
         }
 
-        public MaterialsViewModel(Document doc)
+        public MaterialsViewModel(IMaterialService service)
         {
-            _doc = doc;
-            QueryElements();
-            //DeleteMaterialsCommand = new RelayCommand(DeleteMaterials);
-
-            MessengerInstance.Register<MaterialData>(this, Contacts.Tokens.CreateMaterial, CreateMaterial);
+            _service = service;
+            GetElements();
         }
 
-
+        private void GetElements()
+        {
+            Materials = new ObservableCollection<MaterialData>(_service.GetElements(e => string.IsNullOrEmpty(KeyWorld) || e.Name.Contains(KeyWorld)));
+        }
 
         private void DeleteMaterials(IList selectedItems)
         {
-            _doc.NewTrans("删除材质", () =>
+            for (int i = selectedItems.Count - 1; i >= 0; i--)
             {
-                for (int i = selectedItems.Count - 1; i >= 0; i--)
-                {
-                    var data = selectedItems[i] as MaterialData;
-                    _doc.Delete(data.Material.Id);
-                    Materials.Remove(data);
-                }
-            });
-
+                var data = selectedItems[i] as MaterialData;
+                _service.DeleteElement(data);
+                Materials.Remove(data);
+            }
         }
         #region 命令
 
@@ -96,7 +93,7 @@ namespace ZMZ.Revit.Tuna.ViewModels
 
         public RelayCommand QueryElementsCommand
         {
-            get => _queryElementsCommand ??= new RelayCommand(QueryElements);
+            get => new RelayCommand(GetElements);
         }
 
         /// <summary>
@@ -126,23 +123,38 @@ namespace ZMZ.Revit.Tuna.ViewModels
 
         public RelayCommand<MaterialData> EditMaterialCommand
         {
-            get => _editMaterialCommand ??= new RelayCommand<MaterialData>(obj =>
-            {
-                MessengerInstance.Send(new NotificationMessageAction<MaterialData>(obj, "Edit", (e) => { }), Contacts.Tokens.ShowMaterialInfoDialog);
-            });
+            get => new RelayCommand<MaterialData>(obj =>
+           {
+               //MessengerInstance.Send(new NotificationMessageAction<MaterialData>(obj, Contacts.Tokens.EditMaterial, (e) => { }), Contacts.Tokens.ShowMaterialInfoDialog);
+               MessengerInstance.Send(new NotificationMessageAction<MaterialData>(obj,
+                    new MaterialInfoViewModel(_service),
+                    Contacts.Tokens.CreateMaterial,
+                    (e) =>
+                    {
+                        //if (e != null)
+                        //{
+                        //    Materials.Insert(0, e);
+                        //}
+                    }),
+                     Contacts.Tokens.ShowMaterialInfoDialog);
+           });
         }
 
         public RelayCommand CreateMaterialCommand
         {
-            get => _createMaterialCommand ??= new RelayCommand(() =>
+            get => new RelayCommand(() =>
             {
-                MessengerInstance.Send(new NotificationMessageAction<MaterialData>(null, _doc, Contacts.Tokens.CreateMaterial, (e) =>
-                 {
-                     if (e != null)
+                MessengerInstance.Send(new NotificationMessageAction<MaterialData>(null,
+                    new MaterialInfoViewModel(_service),
+                    Contacts.Tokens.CreateMaterial,
+                    (e) =>
                      {
-                         Materials.Insert(0, e);
-                     }
-                 }), Contacts.Tokens.ShowMaterialInfoDialog);
+                         if (e != null)
+                         {
+                             Materials.Insert(0, e);
+                         }
+                     }),
+                     Contacts.Tokens.ShowMaterialInfoDialog);
             });
         }
         private void CreateMaterial(MaterialData obj)
@@ -154,17 +166,6 @@ namespace ZMZ.Revit.Tuna.ViewModels
             return !string.IsNullOrEmpty(KeyWorld);
         }
 
-        private void QueryElements()
-        {
-            FilteredElementCollector elements = new FilteredElementCollector(_doc).OfClass(typeof(Material));
-            var materialDatas = elements.ToList().ConvertAll(x => new MaterialData(x as Material))
-                .Where(e => e.Material != null && (string.IsNullOrEmpty(KeyWorld) || e.Name.Contains(KeyWorld)));
-            //foreach (var item in materialDatas)
-            //{
-            //    Materials.Add(item);
-            //}
-            Materials = new ObservableCollection<MaterialData>(materialDatas);
-        }
         #endregion
     }
 }

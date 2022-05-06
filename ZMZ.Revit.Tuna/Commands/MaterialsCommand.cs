@@ -20,16 +20,35 @@ namespace ZMZ.Revit.Tuna.Commands
         {
             UIDocument uIDocument = commandData.Application.ActiveUIDocument;
             Document document = uIDocument.Document;
+            try
+            {
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
             Views.Materials materials = new Views.Materials(document);
             //"ZMZ.Revit.Entity.dll".LoadAssembly();
             TransactionStatus starus;
             using (TransactionGroup group = new TransactionGroup(document, "材质管理"))
             {
-                group.Start();
-                if (materials.ShowDialog().Value)
-                    starus = group.Assimilate();
-                else
-                    starus = group.RollBack();
+                try
+                {
+                    group.Start();
+                    if (materials.ShowDialog().Value)
+                        starus = group.Assimilate();
+                    else
+                        starus = group.RollBack();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    group.RollBack();
+                    starus = TransactionStatus.Error;
+                }
+
             }
             if (starus == TransactionStatus.Committed)
                 return Result.Succeeded;

@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using ZMZ.Revit.Entity.Materials;
 using ZMZ.Revit.Toolkit.Extension;
 using ZMZ.Revit.Toolkit.Extension.Revit;
+using ZMZ.Revit.Tuna.IServices;
 
 namespace ZMZ.Revit.Tuna.ViewModels
 {
@@ -49,13 +50,18 @@ namespace ZMZ.Revit.Tuna.ViewModels
         #endregion
 
         private MaterialData _materialData;
+        private readonly IMaterialService _service;
         private NotificationMessageAction<MaterialData> _message;
-        public MaterialInfoViewModel(NotificationMessageAction<MaterialData> message)
+        public MaterialInfoViewModel(IMaterialService service)
         {
-            _message = message;
-            if (message.Sender is MaterialData material)
+            _service = service;
+        }
+
+        public void Initial(object sender)
+        {
+            if (sender != null && sender is MaterialData materialData)
             {
-                _materialData = material ?? new MaterialData(null);
+                _materialData = materialData;
                 Name = _materialData.Name;
                 Color = _materialData.Color;
                 AppearnceColor = _materialData.AppearanceColor;
@@ -91,16 +97,11 @@ namespace ZMZ.Revit.Tuna.ViewModels
         {
             get => new RelayCommand(() =>
             {
-                if (_message.Notification == Contacts.Tokens.CreateMaterial)
+                if (_materialData == null)
                 {
-                    Document doc = _message.Target as Document;
-                    doc.NewTrans("创建材质", () =>
-                    {
-                        ElementId elementid = Material.Create(doc, Name);
-                        _materialData = new MaterialData(doc.GetElement(elementid) as Material);
-                    });
+                    _materialData = _service.CreateElement(Name);
                 }
-                else if (_materialData.Name != Name)
+                if (_materialData.Name != Name)
                 {
                     _materialData.Doc.NewTrans("修改材质名称", () => _materialData.Material.Name = Name);
                     _materialData.Name = Name;
@@ -111,7 +112,7 @@ namespace ZMZ.Revit.Tuna.ViewModels
                     _materialData.Color = Color;
                 }
                 _materialData.AppearanceColor = AppearnceColor;
-                
+
                 //更新材质列表德消息
                 //方式1：使用消息通知进行列表德更新
                 //_message.Execute(_materialData);

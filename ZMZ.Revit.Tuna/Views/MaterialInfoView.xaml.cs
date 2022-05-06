@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ZMZ.Revit.Entity.Materials;
+using ZMZ.Revit.Tuna.IServices;
 using ZMZ.Revit.Tuna.ViewModels;
 
 namespace ZMZ.Revit.Tuna.Views
@@ -22,10 +23,10 @@ namespace ZMZ.Revit.Tuna.Views
     /// </summary>
     public partial class MaterialInfoView : Window
     {
-        public MaterialInfoView(NotificationMessageAction<MaterialData> message = null)
+        public MaterialInfoView()
         {
             InitializeComponent();
-            DataContext = new MaterialInfoViewModel(message);
+            //DataContext = new MaterialInfoViewModel(service);
             Messenger.Default.Register<bool>(this, Contacts.Tokens.CloseMaterialInfoDialog, CloseWindow);
             Unloaded += (o, e) => 
             { 

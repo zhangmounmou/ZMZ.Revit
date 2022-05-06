@@ -1,19 +1,9 @@
 ﻿using Autodesk.Revit.DB;
 using GalaSoft.MvvmLight.Messaging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using ZMZ.Revit.Entity.Materials;
+using ZMZ.Revit.Tuna.Services;
+using ZMZ.Revit.Tuna.ViewModels;
 
 namespace ZMZ.Revit.Tuna.Views
 {
@@ -26,7 +16,7 @@ namespace ZMZ.Revit.Tuna.Views
         public Materials(Document doc)
         {
             InitializeComponent();
-            _viewModel = new ViewModels.MaterialsViewModel(doc);
+            _viewModel = new ViewModels.MaterialsViewModel(new MaterialService(new DataContext(doc)));
             this.DataContext = _viewModel;
             Messenger.Default.Register<bool>(this, Contacts.Tokens.MaterialsDialog, CloseWindow);
             Messenger.Default.Register<NotificationMessageAction<MaterialData>>(this, Contacts.Tokens.ShowMaterialInfoDialog, ShowMaterialInfo);
@@ -35,7 +25,10 @@ namespace ZMZ.Revit.Tuna.Views
 
         private void ShowMaterialInfo(NotificationMessageAction<MaterialData> messageAction)
         {
-            MaterialInfoView materialInfoView = new MaterialInfoView(messageAction);
+            MaterialInfoView materialInfoView = new MaterialInfoView();
+            MaterialInfoViewModel materialInfoViewModel = messageAction.Target as MaterialInfoViewModel;
+            materialInfoView.DataContext = materialInfoViewModel;
+            materialInfoViewModel.Initial(messageAction.Sender);
             materialInfoView.ShowDialog();
         }
 
