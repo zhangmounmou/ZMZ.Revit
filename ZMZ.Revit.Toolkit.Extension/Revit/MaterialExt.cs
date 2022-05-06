@@ -13,9 +13,8 @@ namespace ZMZ.Revit.Toolkit.Extension.Revit
         public static Color GetAppearanceColor(this Material material)
         {
 
-#if RVT_18 || RVT_19 || DEBUG
+#if RVT_18 
             return material.SurfacePatternColor;
-
 #else
             var mId = material.AppearanceAssetId;
             if (mId != null && mId.IntegerValue != -1)
@@ -25,13 +24,12 @@ namespace ZMZ.Revit.Toolkit.Extension.Revit
                 if (asset != null)
                 {
                     Autodesk.Revit.DB.Visual.AssetPropertyDoubleArray4d property = (Autodesk.Revit.DB.Visual.AssetPropertyDoubleArray4d)asset?.FindByName("generic_diffuse");
-                    return property.GetValueAsColor();
+                    if (property != null)
+                        return property.GetValueAsColor();
                 }
             }
             return null;
 #endif
-
-
         }
     }
 }

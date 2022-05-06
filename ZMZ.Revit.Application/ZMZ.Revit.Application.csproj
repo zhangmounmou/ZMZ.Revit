@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net48</TargetFramework>
+		<TargetFramework>net472</TargetFramework>
 		<PlatformTarget>x64</PlatformTarget>
 		<UseWPF>true</UseWPF>
 		<StartAction>Program</StartAction>
@@ -10,9 +10,9 @@
 	</PropertyGroup>
 	<!--开发使用Debug，方便热加载-->
 	<PropertyGroup Condition="'$(Configuration)'=='Debug'">
-		<TargetFramework>net48</TargetFramework>
+		<TargetFramework>net472</TargetFramework>
 		<StartAction>Program</StartAction>
-		<StartProgram>C:\Program Files\Autodesk\Revit 2021\Revit.exe</StartProgram>
+		<StartProgram>C:\Program Files\Autodesk\Revit 2019\Revit.exe</StartProgram>
 	</PropertyGroup>
 
 	<!--设置Framework和启动的外部程序-->

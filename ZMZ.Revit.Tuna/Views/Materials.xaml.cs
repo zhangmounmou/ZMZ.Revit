@@ -1,4 +1,5 @@
 ﻿using Autodesk.Revit.DB;
+using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ZMZ.Revit.Entity.Materials;
 
 namespace ZMZ.Revit.Tuna.Views
 {
@@ -26,39 +28,31 @@ namespace ZMZ.Revit.Tuna.Views
             InitializeComponent();
             _viewModel = new ViewModels.MaterialsViewModel(doc);
             this.DataContext = _viewModel;
-            //FilteredElementCollector elements = new FilteredElementCollector(doc).OfClass(typeof(Material));
-            //foreach (var item in elements)
-            //{
-            //    ListMaterial.Items.Add(item);
-            //}
-            //ListMaterial.ItemsSource = elements.ToList();
+            Messenger.Default.Register<bool>(this, Contacts.Tokens.MaterialsDialog, CloseWindow);
+            Messenger.Default.Register<NotificationMessageAction<MaterialData>>(this, Contacts.Tokens.ShowMaterialInfoDialog, ShowMaterialInfo);
+            Unloaded += Materials_Unloaded;
         }
 
-        //private void Btn_DeleteMaterials_Click(object sender, RoutedEventArgs e)
-        //{
-        //    using (Transaction transaction = new Transaction(_doc, "删除材质"))
-        //    {
-        //        if (!_doc.IsModifiable)
-        //            transaction.Start();
-        //        try
-        //        {
-        //            for (int i = ListMaterial.SelectedItems.Count - 1; i >= 0; i--)
-        //            {
-        //                _doc.Delete(((Material)ListMaterial.SelectedItems[i]).Id);
-        //                ListMaterial.Items.Remove(ListMaterial.SelectedItems[i]);
-        //            }
-        //            if (transaction.HasStarted())
-        //                transaction.Commit();
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            MessageBox.Show(ex.Message);
-        //            if (transaction.HasStarted())
-        //                transaction.RollBack();
-        //        }
-        //    }
+        private void ShowMaterialInfo(NotificationMessageAction<MaterialData> messageAction)
+        {
+            MaterialInfoView materialInfoView = new MaterialInfoView(messageAction);
+            materialInfoView.ShowDialog();
+        }
 
-        //}
+        private void Materials_Unloaded(object sender, RoutedEventArgs e)
+        {
+            //这里不要使用带泛型的注销消息，有可能会导致非给定泛型的消息无法注销的问题
+            //Messenger.Default.Unregister<bool>(this);
+            Messenger.Default.Unregister(this);
 
+            //将绑定的DataContext的消息中心也注销掉
+            Messenger.Default.Unregister(this.DataContext);
+        }
+
+        private void CloseWindow(bool result)
+        {
+            DialogResult = result;
+            Close();
+        }
     }
 }
