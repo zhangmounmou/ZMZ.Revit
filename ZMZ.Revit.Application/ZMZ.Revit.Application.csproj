@@ -6,7 +6,7 @@
 		<UseWPF>true</UseWPF>
 		<StartAction>Program</StartAction>
 		<StartProgram>C:\Program Files\Autodesk\Revit 2019\Revit.exe</StartProgram>
-		<Configurations>Debug;Release;RVT_19;RVT_20;RVT_22;RVT_21;RVT_18;R19_DB</Configurations>
+		<Configurations>Debug;Release;RVT_19;RVT_20;RVT_22;RVT_21;RVT_18;R19_DB;RVT_16</Configurations>
 	</PropertyGroup>
 	<!--开发使用Debug，方便热加载-->
 	<PropertyGroup Condition="'$(Configuration)'=='Debug'">
