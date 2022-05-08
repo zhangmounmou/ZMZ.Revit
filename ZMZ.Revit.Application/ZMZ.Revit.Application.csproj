@@ -13,6 +13,7 @@
 		<TargetFramework>net472</TargetFramework>
 		<StartAction>Program</StartAction>
 		<StartProgram>C:\Program Files\Autodesk\Revit 2019\Revit.exe</StartProgram>
+		<RvtVersion>2019</RvtVersion>
 	</PropertyGroup>
 
 	<!--设置Framework和启动的外部程序-->

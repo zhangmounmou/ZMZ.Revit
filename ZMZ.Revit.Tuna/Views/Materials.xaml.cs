@@ -12,12 +12,11 @@ namespace ZMZ.Revit.Tuna.Views
     /// </summary>
     public partial class Materials : Window
     {
-        private ViewModels.MaterialsViewModel _viewModel;
         public Materials(Document doc)
         {
             InitializeComponent();
-            _viewModel = new ViewModels.MaterialsViewModel(new MaterialService(new DataContext(doc)));
-            this.DataContext = _viewModel;
+            //已通过IOC容器注册了，这里可以优化掉了
+            //this.DataContext = new ViewModels.MaterialsViewModel(new MaterialService(new DataContext(doc)));
             Messenger.Default.Register<bool>(this, Contacts.Tokens.MaterialsDialog, CloseWindow);
             Messenger.Default.Register<NotificationMessageAction<MaterialData>>(this, Contacts.Tokens.ShowMaterialInfoDialog, ShowMaterialInfo);
             Unloaded += Materials_Unloaded;
