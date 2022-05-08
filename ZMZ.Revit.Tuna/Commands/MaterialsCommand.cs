@@ -34,6 +34,7 @@ namespace ZMZ.Revit.Tuna.Commands
             SimpleIoc.Default.Register<IMaterialService, MaterialService>();
             SimpleIoc.Default.Register<Interfaces.IDataContext, Services.DataContext>();
             SimpleIoc.Default.Register<ViewModels.MaterialsViewModel>();
+            MessageBox.Show("IOC注册成功");
             //使用服务
             ///1。使用IOC、Provider去获取服务
             //ServiceLocator.Current.GetInstance<MaterialsViewModel>();
@@ -66,6 +67,7 @@ namespace ZMZ.Revit.Tuna.Commands
                 }
 
             }
+            SimpleIoc.Default.Unregister<Document>();
             if (starus == TransactionStatus.Committed)
                 return Result.Succeeded;
             else
