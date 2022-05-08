@@ -49,7 +49,7 @@ namespace ZMZ.Revit.Tuna.ViewModels
         }
         #endregion
 
-        private MaterialData _materialData;
+        public MaterialData MaterialData { get; set; }
         private readonly IMaterialService _service;
         private NotificationMessageAction<MaterialData> _message;
         public MaterialInfoViewModel(IMaterialService service)
@@ -61,10 +61,10 @@ namespace ZMZ.Revit.Tuna.ViewModels
         {
             if (sender != null && sender is MaterialData materialData)
             {
-                _materialData = materialData;
-                Name = _materialData.Name;
-                Color = _materialData.Color;
-                AppearnceColor = _materialData.AppearanceColor;
+                MaterialData = materialData;
+                Name = MaterialData.Name;
+                Color = MaterialData.Color;
+                AppearnceColor = MaterialData.AppearanceColor;
             }
         }
 
@@ -97,27 +97,27 @@ namespace ZMZ.Revit.Tuna.ViewModels
         {
             get => new RelayCommand(() =>
             {
-                if (_materialData == null)
+                if (MaterialData == null)
                 {
-                    _materialData = _service.CreateElement(Name);
+                    MaterialData = _service.CreateElement(Name);
                 }
-                if (_materialData.Name != Name)
+                if (MaterialData.Name != Name)
                 {
-                    _materialData.Doc.NewTrans("修改材质名称", () => _materialData.Material.Name = Name);
-                    _materialData.Name = Name;
+                    MaterialData.Doc.NewTrans("修改材质名称", () => MaterialData.Material.Name = Name);
+                    MaterialData.Name = Name;
                 }
-                if (_materialData.Color != Color)
+                if (MaterialData.Color != Color)
                 {
-                    _materialData.Doc.NewTrans("修改材质颜色", () => _materialData.Material.Color = Color);
-                    _materialData.Color = Color;
+                    MaterialData.Doc.NewTrans("修改材质颜色", () => MaterialData.Material.Color = Color);
+                    MaterialData.Color = Color;
                 }
-                _materialData.AppearanceColor = AppearnceColor;
+                MaterialData.AppearanceColor = AppearnceColor;
 
                 //更新材质列表德消息
                 //方式1：使用消息通知进行列表德更新
-                //_message.Execute(_materialData);
+                //_message.Execute(MaterialData);
                 //方式2 ：使用消息中心进行材质列表的更新
-                MessengerInstance.Send(_materialData, Contacts.Tokens.CreateMaterial);
+                MessengerInstance.Send(MaterialData, Contacts.Tokens.CreateMaterial);
                 //窗体关闭的消息
                 MessengerInstance.Send(true, Contacts.Tokens.CloseMaterialInfoDialog);
             });

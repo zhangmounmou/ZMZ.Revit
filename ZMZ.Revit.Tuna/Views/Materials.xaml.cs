@@ -29,7 +29,10 @@ namespace ZMZ.Revit.Tuna.Views
             MaterialInfoViewModel materialInfoViewModel = messageAction.Target as MaterialInfoViewModel;
             materialInfoView.DataContext = materialInfoViewModel;
             materialInfoViewModel.Initial(messageAction.Sender);
-            materialInfoView.ShowDialog();
+            if (materialInfoView.ShowDialog().Value)
+            {
+                messageAction.Execute(materialInfoViewModel.MaterialData);
+            } 
         }
 
         private void Materials_Unloaded(object sender, RoutedEventArgs e)
